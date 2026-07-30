@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
+<title>Votre Exploitation — Vitrine Agrobusiness</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500;1,9..144,600&family=IBM+Plex+Mono:wght@500;600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --soil-950:#16241a;
+    --soil-900:#1f331f;
+    --parchment:#f2e8d3;
+    --parchment-alt:#e9dcbb;
+    --leaf-700:#31502c;
+    --leaf-600:#3f6438;
+    --leaf-500:#517d49;
+    --gold-500:#d69f16;
+    --gold-600:#b9860e;
+    --rust-600:#ab3e1f;
+    --rust-700:#8c3119;
+    --ink:#1c1108;
+    --paper:#f7f0dd;
+    --white:#ffffff;
+    --green-wash:#e9f0e3;
+    --line:rgba(28,17,8,0.14);
+    --font-display:'Fraunces', serif;
+    --font-mono:'IBM Plex Mono', monospace;
+    --font-body:'Work Sans', sans-serif;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{
+    scroll-behavior:smooth;
+    background:var(--parchment);
+    color-scheme:light;
+  }
+  body{
+    font-family:var(--font-body);
+    background:var(--parchment);
+    color:var(--ink);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  img,svg{display:block; max-width:100%;}
+  a{color:inherit;}
+  button{font-family:inherit; cursor:pointer; border:none;}
+  input[type="range"]{-webkit-appearance:none; appearance:none;}
+
+  :focus-visible{ outline:3px solid var(--gold-600); outline-offset:3px; }
+
+  .wrap{ max-width:1080px; margin:0 auto; padding:0 24px; }
+
+  /* ---------- Furrow pattern bg ---------- */
+  .furrows{
+    position:absolute; inset:0; z-index:0; opacity:0.5;
+    background-image: repeating-linear-gradient(115deg, rgba(49,80,44,0.10) 0px, rgba(49,80,44,0.10) 2px, transparent 2px, transparent 34px);
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    background:var(--soil-950);
+    color:var(--paper);
+    position:sticky; top:0; z-index:50;
+    border-bottom:3px solid var(--gold-500);
+  }
+  .header-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 24px;
+  }
+  .logo{
+    font-family:var(--font-display);
+    font-weight:600;
+    line-height:0.92;
+    letter-spacing:0.01em;
+  }
+  .logo .l1{ font-size:1.05rem; color:var(--gold-500); font-style:italic; display:block;}
+  .logo .l2{ font-size:1.55rem; display:block; }
+  .logo .tag{
+    font-family:var(--font-mono); font-size:0.62rem; letter-spacing:0.14em;
+    color:rgba(247,240,221,0.6); text-transform:uppercase; display:block; margin-top:4px;
+  }
+
+  .cta-ribbon{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--leaf-600);
+    color:var(--white);
+    font-family:var(--font-body); font-weight:700; font-size:0.82rem;
+    letter-spacing:0.03em; text-transform:uppercase;
+    padding:11px 18px 11px 16px;
+    border-radius:3px 12px 3px 12px;
+    box-shadow:0 3px 0 var(--leaf-700);
+    transition:transform 0.15s ease;
+    white-space:nowrap;
+    text-decoration:none;
+  }
+  .cta-ribbon:hover{ transform:translateY(-1px); }
+  .cta-ribbon:active{ transform:translateY(1px); box-shadow:0 1px 0 var(--rust-700); }
+  .cta-ribbon svg{ width:16px; height:16px; flex-shrink:0; }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    background:linear-gradient(180deg, var(--soil-950) 0%, var(--soil-900) 100%);
+    color:var(--paper);
+    overflow:hidden;
+    padding:64px 24px 76px;
+  }
+  .hero-inner{ position:relative; z-index:1; max-width:720px; margin:0 auto; text-align:center; }
+  .eyebrow{
+    font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.18em;
+    text-transform:uppercase; color:var(--gold-500); margin-bottom:18px;
+  }
+  h1{
+    font-family:var(--font-display);
+    font-style:italic;
+    font-weight:500;
+    font-size:clamp(2rem, 5.5vw, 3.4rem);
+    line-height:1.08;
+    letter-spacing:-0.01em;
+  }
+  h1 em{ color:var(--gold-500); font-style:italic; }
+  .hero p{
+    font-size:1.02rem; color:rgba(247,240,221,0.78);
+    max-width:520px; margin:22px auto 0;
+  }
+  .hero-actions{
+    margin-top:34px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap;
+  }
+  .btn-outline{
+    border:1.5px solid rgba(247,240,221,0.35);
+    color:var(--paper); background:transparent;
+    padding:12px 22px; border-radius:3px 12px 3px 12px;
+    font-weight:600; font-size:0.88rem; text-decoration:none;
+    display:inline-block;
+  }
+
+  /* ---------- Section headers ---------- */
+  .section{ padding:64px 24px; background:var(--parchment); }
+  .section-alt{ background:var(--green-wash); }
+  .section-head{ max-width:640px; margin:0 auto 40px; text-align:center; }
+  .section-head .eyebrow{ color:var(--leaf-600); }
+  .section-head h2{
+    font-family:var(--font-display); font-style:italic; font-weight:500;
+    font-size:clamp(1.6rem, 3.4vw, 2.3rem); color:var(--ink); margin-top:10px;
+  }
+  .section-head p{ margin-top:12px; color:rgba(28,17,8,0.65); font-size:0.98rem; }
+
+  /* ---------- Devis builder (signature element) ---------- */
+  .devis-card{
+    max-width:760px; margin:0 auto;
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:0 18px 40px -24px rgba(28,17,8,0.35);
+  }
+  .tabs{
+    display:flex; background:var(--soil-950);
+  }
+  .tab{
+    flex:1; padding:15px 8px; text-align:center;
+    color:rgba(247,240,221,0.55);
+    font-weight:600; font-size:0.82rem; letter-spacing:0.02em;
+    background:transparent; border-bottom:3px solid transparent;
+    transition:color 0.15s ease, border-color 0.15s ease;
+  }
+  .tab.active{ color:var(--paper); border-bottom-color:var(--leaf-500); background:rgba(247,240,221,0.04);}
+
+  .tab-panel{ display:none; padding:32px 28px 30px; }
+  .tab-panel.active{ display:block; }
+
+  .product-meta{ display:flex; align-items:flex-start; gap:16px; margin-bottom:22px;}
+  .product-icon{
+    width:52px; height:52px; flex-shrink:0;
+    background:var(--leaf-700); border-radius:10px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .product-icon svg{ width:28px; height:28px; stroke:var(--paper); }
+  .product-meta h3{
+    font-family:var(--font-display); font-style:italic; font-weight:500;
+    font-size:1.25rem; color:var(--ink);
+  }
+  .product-meta .desc{ font-size:0.87rem; color:rgba(28,17,8,0.6); margin-top:4px; }
+
+  .price-block{
+    background:var(--soil-950);
+    border-radius:3px 16px 3px 16px;
+    padding:22px 22px 18px;
+    margin-bottom:22px;
+    position:relative;
+  }
+  .price-block::before{
+    content:"PRIX ESTIMÉ"; position:absolute; top:-11px; left:18px;
+    background:var(--gold-500); color:var(--soil-950);
+    font-family:var(--font-mono); font-size:0.62rem; font-weight:700;
+    letter-spacing:0.12em; padding:4px 10px; border-radius:2px 8px 2px 8px;
+  }
+  .price-display{
+    display:flex; align-items:baseline; gap:6px; justify-content:center;
+    color:var(--paper); margin-top:6px;
+  }
+  .price-number{
+    font-family:var(--font-mono); font-weight:700;
+    font-size:clamp(2.1rem, 7vw, 2.9rem);
+    font-variant-numeric:tabular-nums;
+    transition:opacity 0.12s ease;
+  }
+  .price-currency{ font-family:var(--font-mono); font-size:1.1rem; color:var(--gold-500); font-weight:600;}
+  .price-sub{
+    text-align:center; font-family:var(--font-mono); font-size:0.72rem;
+    color:rgba(247,240,221,0.5); margin-top:6px; letter-spacing:0.04em;
+  }
+
+  .slider-row{ margin-bottom:8px; }
+  .slider-row label{
+    display:flex; justify-content:space-between; align-items:baseline;
+    font-size:0.84rem; font-weight:600; margin-bottom:10px;
+  }
+  .slider-row .unit-val{ font-family:var(--font-mono); color:var(--leaf-700); font-weight:700; }
+
+  input[type="range"]{
+    width:100%; height:6px; border-radius:4px;
+    background:var(--line);
+    outline-offset:4px;
+  }
+  input[type="range"]::-webkit-slider-thumb{
+    -webkit-appearance:none; appearance:none;
+    width:24px; height:24px; border-radius:50%;
+    background:var(--rust-600); border:3px solid var(--paper);
+    box-shadow:0 2px 6px rgba(28,17,8,0.35);
+    cursor:pointer; margin-top:-9px;
+  }
+  input[type="range"]::-webkit-slider-runnable-track{
+    height:6px; border-radius:4px; background:var(--line);
+  }
+  input[type="range"]::-moz-range-thumb{
+    width:24px; height:24px; border-radius:50%;
+    background:var(--rust-600); border:3px solid var(--paper);
+    cursor:pointer;
+  }
+
+  .stepper{ display:flex; align-items:center; gap:14px; justify-content:center; margin-bottom:6px;}
+  .step-btn{
+    width:38px; height:38px; border-radius:50%;
+    background:var(--parchment-alt); border:1px solid var(--line);
+    font-size:1.2rem; font-weight:700; color:var(--leaf-700);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .step-btn:hover{ background:var(--leaf-700); color:var(--paper); }
+  .step-val{ font-family:var(--font-mono); font-size:1.1rem; font-weight:700; min-width:70px; text-align:center;}
+
+  .add-btn{
+    width:100%; background:var(--leaf-700); color:var(--paper);
+    padding:14px; border-radius:3px 12px 3px 12px;
+    font-weight:700; font-size:0.9rem; letter-spacing:0.02em;
+    text-transform:uppercase;
+    transition:background 0.15s ease;
+  }
+  .add-btn:hover{ background:var(--leaf-600); }
+  .add-btn.added{ background:var(--gold-600); }
+
+  .badges{ display:flex; gap:8px; flex-wrap:wrap; margin-top:16px; }
+  .badge{
+    font-family:var(--font-mono); font-size:0.66rem; letter-spacing:0.04em;
+    color:var(--leaf-700); background:rgba(63,100,56,0.1);
+    padding:5px 9px; border-radius:2px 8px 2px 8px; text-transform:uppercase;
+  }
+
+  /* ---------- Catalogue fixe (cards) ---------- */
+  .cat-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:20px;
+    max-width:760px; margin:0 auto;
+  }
+  @media (max-width:640px){ .cat-grid{ grid-template-columns:1fr; } }
+
+  .cat-card{
+    background:var(--white); border:1px solid var(--line); border-radius:14px;
+    padding:24px; display:flex; flex-direction:column; gap:14px;
+  }
+  .cat-card .product-icon{ background:var(--leaf-600); }
+
+  .cat-price-row{
+    display:flex; align-items:baseline; gap:5px;
+  }
+  .cat-price-row .num{ font-family:var(--font-mono); font-weight:700; font-size:1.5rem; color:var(--ink);}
+  .cat-price-row .unit{ font-family:var(--font-mono); font-size:0.78rem; color:rgba(28,17,8,0.55); }
+
+  /* ---------- Panier / récap ---------- */
+  .cart-bar{
+    position:sticky; bottom:0; z-index:40;
+    background:var(--soil-950); color:var(--paper);
+    border-top:3px solid var(--gold-500);
+    padding:14px 20px;
+    display:flex; align-items:center; justify-content:space-between; gap:14px;
+    flex-wrap:wrap;
+  }
+  .cart-info{ display:flex; align-items:center; gap:10px; font-size:0.86rem; }
+  .cart-count{
+    background:var(--gold-500); color:var(--soil-950); font-family:var(--font-mono);
+    font-weight:700; font-size:0.78rem; width:26px; height:26px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .cart-total{ font-family:var(--font-mono); font-weight:700; font-size:1.05rem; color:var(--gold-500); }
+  .cart-empty-note{ color:rgba(247,240,221,0.5); font-size:0.82rem; }
+
+  .send-btn{
+    background:var(--rust-600); color:var(--paper);
+    padding:12px 20px; border-radius:3px 12px 3px 12px;
+    font-weight:700; font-size:0.85rem; text-transform:uppercase;
+    display:flex; align-items:center; gap:8px;
+  }
+  .send-btn:disabled{ background:rgba(247,240,221,0.15); color:rgba(247,240,221,0.4); cursor:not-allowed; }
+  .send-btn svg{ width:16px; height:16px; }
+
+  /* ---------- Traçabilité ---------- */
+  .trace-flow{
+    display:flex; align-items:stretch; gap:0; max-width:820px; margin:0 auto;
+    flex-wrap:wrap; justify-content:center;
+  }
+  .trace-step{
+    flex:1; min-width:190px; text-align:center; padding:0 18px; position:relative;
+  }
+  .trace-step:not(:last-child)::after{
+    content:"→"; position:absolute; right:-4px; top:22px;
+    font-family:var(--font-mono); color:var(--gold-600); font-size:1.2rem;
+    display:none;
+  }
+  @media (min-width:720px){ .trace-step:not(:last-child)::after{ display:block; } }
+  .trace-num{
+    width:44px; height:44px; border-radius:50%; background:var(--leaf-700);
+    color:var(--paper); font-family:var(--font-mono); font-weight:700;
+    display:flex; align-items:center; justify-content:center; margin:0 auto 14px;
+  }
+  .trace-step h4{ font-family:var(--font-body); font-weight:700; font-size:0.95rem; margin-bottom:6px;}
+  .trace-step p{ font-size:0.82rem; color:rgba(28,17,8,0.6); }
+
+  /* ---------- Footer ---------- */
+  footer{
+    background:var(--soil-950); color:rgba(247,240,221,0.7);
+    padding:48px 24px 28px;
+  }
+  .footer-inner{
+    max-width:1080px; margin:0 auto;
+    display:flex; justify-content:space-between; gap:32px; flex-wrap:wrap;
+  }
+  footer .logo .l2{ color:var(--paper); }
+  .footer-contact{ font-family:var(--font-mono); font-size:0.85rem; line-height:2; }
+  .footer-contact a{ text-decoration:none; }
+  .footer-bottom{
+    max-width:1080px; margin:32px auto 0; padding-top:20px;
+    border-top:1px solid rgba(247,240,221,0.12);
+    font-size:0.76rem; color:rgba(247,240,221,0.4);
+    text-align:center;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *{ transition:none !important; animation:none !important; }
+  }
+
+  .sr-only{
+    position:absolute; width:1px; height:1px; overflow:hidden;
+    clip:rect(0,0,0,0); white-space:nowrap;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">
+      <span class="l1">votre</span>
+      <span class="l2">EXPLOITATION</span>
+      <span class="tag">Agrobusiness · Sénégal</span>
+    </div>
+    <a class="cta-ribbon" href="#devis">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.06-1.33C8.51 21.5 10.2 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm5.2 14.2c-.22.62-1.26 1.19-1.74 1.24-.44.05-1.01.07-1.63-.1-.38-.11-.86-.28-1.48-.55-2.6-1.12-4.3-3.74-4.43-3.92-.13-.18-1.06-1.41-1.06-2.69 0-1.28.67-1.91.91-2.17.24-.26.52-.32.7-.32.17 0 .35 0 .5.01.16.01.38-.06.6.46.22.53.75 1.83.82 1.96.07.13.11.29.02.47-.09.18-.14.29-.27.44-.13.15-.28.34-.4.46-.13.13-.27.27-.12.53.16.26.7 1.15 1.5 1.87 1.03.92 1.9 1.2 2.16 1.34.26.13.41.11.56-.07.16-.18.66-.77.84-1.03.18-.26.35-.22.59-.13.24.09 1.53.72 1.79.86.26.13.44.2.5.31.06.11.06.62-.16 1.23z"/></svg>
+      Demander un devis
+    </a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="furrows" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <div class="eyebrow">Vitrine de démonstration</div>
+    <h1>Ce que vos clients verront <em>avant même</em> de visiter vos champs.</h1>
+    <p>Un site qui affiche vos produits, calcule un devis en direct selon la superficie du client, et envoie la demande sur WhatsApp — sans qu'il ait à décrocher le téléphone.</p>
+    <div class="hero-actions">
+      <a class="cta-ribbon" href="#devis">Composer un devis</a>
+      <a class="btn-outline" href="#catalogue">Voir le catalogue</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="devis">
+  <div class="section-head">
+    <div class="eyebrow">Simulateur</div>
+    <h2>Composez votre devis en direct</h2>
+    <p>Le client ajuste la superficie à couvrir, le prix se recalcule instantanément — comme sur une étiquette de marché, mais interactive.</p>
+  </div>
+
+  <div class="devis-card">
+    <div class="tabs" role="tablist">
+      <button class="tab active" data-tab="serre" role="tab" aria-selected="true">Tissu de serre</button>
+      <button class="tab" data-tab="ombriere" role="tab" aria-selected="false">Ombrière</button>
+      <button class="tab" data-tab="brisevent" role="tab" aria-selected="false">Brise-vent</button>
+    </div>
+
+    <!-- Tissu de serre -->
+    <div class="tab-panel active" data-panel="serre">
+      <div class="product-meta">
+        <div class="product-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8c4-3 14-3 18 0"/><path d="M3 12c4-3 14-3 18 0"/><path d="M3 16c4-3 14-3 18 0"/></svg>
+        </div>
+        <div>
+          <h3>Tissu de serre anti-UV</h3>
+          <div class="desc">Protège les cultures des intempéries et des parasites.</div>
+        </div>
+      </div>
+      <div class="price-block">
+        <div class="price-display">
+          <span class="price-number" id="price-serre">12 000</span>
+          <span class="price-currency">FCFA</span>
+        </div>
+        <div class="price-sub" id="price-serre-sub">pour 20 m²</div>
+      </div>
+      <div class="slider-row">
+        <label>Surface à couvrir <span class="unit-val" id="val-serre">20 m²</span></label>
+        <input type="range" id="slider-serre" min="10" max="500" step="5" value="20" aria-label="Surface en mètres carrés pour le tissu de serre">
+      </div>
+      <div class="badges">
+        <span class="badge">600 F / m²</span>
+        <span class="badge">Résistant intempéries</span>
+      </div>
+      <button class="add-btn" data-add="serre" style="margin-top:20px;">Ajouter au devis</button>
+    </div>
+
+    <!-- Ombrière -->
+    <div class="tab-panel" data-panel="ombriere">
+      <div class="product-meta">
+        <div class="product-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10l8-6 8 6v10"/><path d="M4 12h16"/></svg>
+        </div>
+        <div>
+          <h3>Ombrière anti-chaleur</h3>
+          <div class="desc">Réduit la chaleur, favorise une croissance saine des cultures.</div>
+        </div>
+      </div>
+      <div class="price-block">
+        <div class="price-display">
+          <span class="price-number" id="price-ombriere">43 350</span>
+          <span class="price-currency">FCFA</span>
+        </div>
+        <div class="price-sub" id="price-ombriere-sub">pour 100 m²</div>
+      </div>
+      <div class="slider-row">
+        <label>Surface à couvrir <span class="unit-val" id="val-ombriere">100 m²</span></label>
+        <input type="range" id="slider-ombriere" min="50" max="1200" step="10" value="100" aria-label="Surface en mètres carrés pour l'ombrière">
+      </div>
+      <div class="badges">
+        <span class="badge">≈ 433 F / m²</span>
+        <span class="badge">Lumière diffusée</span>
+      </div>
+      <button class="add-btn" data-add="ombriere" style="margin-top:20px;">Ajouter au devis</button>
+    </div>
+
+    <!-- Brise-vent -->
+    <div class="tab-panel" data-panel="brisevent">
+      <div class="product-meta">
+        <div class="product-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h13a3 3 0 1 0-2.5-4.6"/><path d="M3 12h17a3 3 0 1 1-2.5 4.6"/><path d="M3 18h9"/></svg>
+        </div>
+        <div>
+          <h3>Brise-vent</h3>
+          <div class="desc">Réduit la force du vent, crée un microclimat favorable.</div>
+        </div>
+      </div>
+      <div class="price-block">
+        <div class="price-display">
+          <span class="price-number" id="price-brisevent">25 000</span>
+          <span class="price-currency">FCFA</span>
+        </div>
+        <div class="price-sub" id="price-brisevent-sub">1 rouleau · 25 m linéaires</div>
+      </div>
+      <div class="slider-row">
+        <label>Longueur de clôture <span class="unit-val" id="val-brisevent">25 m</span></label>
+        <input type="range" id="slider-brisevent" min="25" max="500" step="25" value="25" aria-label="Longueur en mètres pour le brise-vent">
+      </div>
+      <div class="badges">
+        <span class="badge">Rouleau 25m × 2m</span>
+        <span class="badge">Maille résistante</span>
+      </div>
+      <button class="add-btn" data-add="brisevent" style="margin-top:20px;">Ajouter au devis</button>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="catalogue">
+  <div class="section-head">
+    <div class="eyebrow">Catalogue</div>
+    <h2>Autres produits disponibles</h2>
+    <p>Prix fixes à la pièce ou au kilo, ajoutés au même devis.</p>
+  </div>
+
+  <div class="cat-grid">
+    <div class="cat-card">
+      <div class="product-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M3 12h3M18 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>
+      </div>
+      <h3 style="font-family:var(--font-display); font-style:italic; font-size:1.2rem;">Polyter</h3>
+      <div class="desc" style="font-size:0.85rem; color:rgba(28,17,8,0.6);">Rétenteur d'eau pour sols — absorbe jusqu'à 300 fois son poids en eau.</div>
+      <div class="cat-price-row"><span class="num">6 000</span><span class="unit">FCFA / kg</span></div>
+      <div class="stepper">
+        <button class="step-btn" data-step="polyter" data-dir="-1" aria-label="Diminuer">−</button>
+        <span class="step-val" id="val-polyter">1 kg</span>
+        <button class="step-btn" data-step="polyter" data-dir="1" aria-label="Augmenter">+</button>
+      </div>
+      <button class="add-btn" data-add="polyter">Ajouter au devis</button>
+    </div>
+
+    <div class="cat-card">
+      <div class="product-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M8 7h8M8 11h8M8 15h8"/></svg>
+      </div>
+      <h3 style="font-family:var(--font-display); font-style:italic; font-size:1.2rem;">Panneau solaire 590W</h3>
+      <div class="desc" style="font-size:0.85rem; color:rgba(28,17,8,0.6);">Haute performance, résistant aux conditions climatiques difficiles.</div>
+      <div class="cat-price-row"><span class="num">56 000</span><span class="unit">FCFA / unité</span></div>
+      <div class="stepper">
+        <button class="step-btn" data-step="solaire" data-dir="-1" aria-label="Diminuer">−</button>
+        <span class="step-val" id="val-solaire">1 unité</span>
+        <button class="step-btn" data-step="solaire" data-dir="1" aria-label="Augmenter">+</button>
+      </div>
+      <button class="add-btn" data-add="solaire">Ajouter au devis</button>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <div class="eyebrow">Traçabilité</div>
+    <h2>D'où viennent vos produits</h2>
+    <p>Chaque devis peut afficher l'origine et le contrôle qualité de ce qui est livré — un argument de confiance pour vos clients.</p>
+  </div>
+  <div class="trace-flow">
+    <div class="trace-step">
+      <div class="trace-num">1</div>
+      <h4>Fournisseur certifié</h4>
+      <p>Matériaux sourcés auprès de fournisseurs identifiés, avec numéro de lot.</p>
+    </div>
+    <div class="trace-step">
+      <div class="trace-num">2</div>
+      <h4>Contrôle qualité</h4>
+      <p>Vérification de la résistance et de la conformité avant expédition.</p>
+    </div>
+    <div class="trace-step">
+      <div class="trace-num">3</div>
+      <h4>Livraison sur site</h4>
+      <p>Livraison partout au Sénégal, installation possible sur demande.</p>
+    </div>
+  </div>
+</section>
+
+<div class="cart-bar" id="cart-bar">
+  <div class="cart-info">
+    <span class="cart-count" id="cart-count">0</span>
+    <span id="cart-label" class="cart-empty-note">Aucun article dans le devis</span>
+  </div>
+  <div style="display:flex; align-items:center; gap:16px;">
+    <span class="cart-total" id="cart-total"></span>
+    <button class="send-btn" id="send-btn" disabled>
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.06-1.33C8.51 21.5 10.2 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm5.2 14.2c-.22.62-1.26 1.19-1.74 1.24-.44.05-1.01.07-1.63-.1-.38-.11-.86-.28-1.48-.55-2.6-1.12-4.3-3.74-4.43-3.92-.13-.18-1.06-1.41-1.06-2.69 0-1.28.67-1.91.91-2.17.24-.26.52-.32.7-.32.17 0 .35 0 .5.01.16.01.38-.06.6.46.22.53.75 1.83.82 1.96.07.13.11.29.02.47-.09.18-.14.29-.27.44-.13.15-.28.34-.4.46-.13.13-.27.27-.12.53.16.26.7 1.15 1.5 1.87 1.03.92 1.9 1.2 2.16 1.34.26.13.41.11.56-.07.16-.18.66-.77.84-1.03.18-.26.35-.22.59-.13.24.09 1.53.72 1.79.86.26.13.44.2.5.31.06.11.06.62-.16 1.23z"/></svg>
+      Envoyer sur WhatsApp
+    </button>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="logo">
+        <span class="l1">votre</span>
+        <span class="l2">EXPLOITATION</span>
+      </div>
+      <p style="margin-top:14px; max-width:280px; font-size:0.85rem; color:rgba(247,240,221,0.5);">
+        Gabarit de démonstration — à adapter avec le nom, les prix et les produits de votre entreprise.
+      </p>
+    </div>
+    <div class="footer-contact">
+      <div>📍 Dakar, Sénégal</div>
+      <div>📞 +221 77 000 00 00</div>
+      <div>🟢 <a href="#">WhatsApp direct</a></div>
+    </div>
+  </div>
+  <div class="footer-bottom">Site de démonstration réalisé pour prospection — secteur agrobusiness.</div>
+</footer>
+
+<script>
+(function(){
+  const fmt = n => Math.round(n).toLocaleString('fr-FR');
+
+  const products = {
+    serre:     { name: "Tissu de serre",     rate: 600,  unit: "m²",  min:10,  qty: 20 },
+    ombriere:  { name: "Ombrière",           rate: 433.33, unit: "m²", min:50, qty: 100 },
+    brisevent: { name: "Brise-vent",         rate: 1000, unit: "rouleau(x)", min:25, qty: 25, roll:25, rollPrice:25000 },
+    polyter:   { name: "Polyter",            rate: 6000, unit: "kg",  qty: 1 },
+    solaire:   { name: "Panneau solaire 590W", rate: 56000, unit: "unité(s)", qty: 1 }
+  };
+
+  const cart = {};
+
+  function priceServe(m2){ return m2 * products.serre.rate; }
+  function priceOmbriere(m2){ return m2 * products.ombriere.rate; }
+  function priceBriseVent(ml){
+    const rolls = Math.ceil(ml / products.brisevent.roll);
+    return rolls * products.brisevent.rollPrice;
+  }
+
+  // Tabs
+  document.querySelectorAll('.tab').forEach(tab=>{
+    tab.addEventListener('click', ()=>{
+      document.querySelectorAll('.tab').forEach(t=>{t.classList.remove('active'); t.setAttribute('aria-selected','false');});
+      document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+      tab.classList.add('active'); tab.setAttribute('aria-selected','true');
+      document.querySelector(`[data-panel="${tab.dataset.tab}"]`).classList.add('active');
+    });
+  });
+
+  // Serre slider
+  const sliderSerre = document.getElementById('slider-serre');
+  function updateSerre(){
+    const m2 = parseInt(sliderSerre.value,10);
+    products.serre.qty = m2;
+    document.getElementById('val-serre').textContent = m2 + ' m²';
+    document.getElementById('price-serre').textContent = fmt(priceServe(m2));
+    document.getElementById('price-serre-sub').textContent = `pour ${m2} m²`;
+  }
+  sliderSerre.addEventListener('input', updateSerre);
+  updateSerre();
+
+  // Ombriere slider
+  const sliderOmbriere = document.getElementById('slider-ombriere');
+  function updateOmbriere(){
+    const m2 = parseInt(sliderOmbriere.value,10);
+    products.ombriere.qty = m2;
+    document.getElementById('val-ombriere').textContent = m2 + ' m²';
+    document.getElementById('price-ombriere').textContent = fmt(priceOmbriere(m2));
+    document.getElementById('price-ombriere-sub').textContent = `pour ${m2} m²`;
+  }
+  sliderOmbriere.addEventListener('input', updateOmbriere);
+  updateOmbriere();
+
+  // Brise-vent slider
+  const sliderBrisevent = document.getElementById('slider-brisevent');
+  function updateBrisevent(){
+    const ml = parseInt(sliderBrisevent.value,10);
+    products.brisevent.qty = ml;
+    const rolls = Math.ceil(ml / products.brisevent.roll);
+    document.getElementById('val-brisevent').textContent = ml + ' m';
+    document.getElementById('price-brisevent').textContent = fmt(priceBriseVent(ml));
+    document.getElementById('price-brisevent-sub').textContent = `${rolls} rouleau${rolls>1?'x':''} · ${ml} m linéaires`;
+  }
+  sliderBrisevent.addEventListener('input', updateBrisevent);
+  updateBrisevent();
+
+  // Steppers (polyter, solaire)
+  document.querySelectorAll('.step-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const key = btn.dataset.step;
+      const dir = parseInt(btn.dataset.dir,10);
+      const min = key === 'polyter' ? 1 : 1;
+      products[key === 'polyter' ? 'polyter' : 'solaire'].qty = Math.max(min, products[key === 'polyter' ? 'polyter' : 'solaire'].qty + dir);
+      const label = key === 'polyter' ? 'kg' : 'unité(s)';
+      document.getElementById('val-' + key).textContent = products[key === 'polyter' ? 'polyter' : 'solaire'].qty + ' ' + label;
+    });
+  });
+
+  // Add to cart
+  document.querySelectorAll('[data-add]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const key = btn.dataset.add;
+      let price, qtyLabel;
+      if(key==='serre'){ price = priceServe(products.serre.qty); qtyLabel = products.serre.qty + ' m²'; }
+      else if(key==='ombriere'){ price = priceOmbriere(products.ombriere.qty); qtyLabel = products.ombriere.qty + ' m²'; }
+      else if(key==='brisevent'){ price = priceBriseVent(products.brisevent.qty); qtyLabel = products.brisevent.qty + ' m (' + Math.ceil(products.brisevent.qty/25) + ' rouleau(x))'; }
+      else if(key==='polyter'){ price = products.polyter.qty * products.polyter.rate; qtyLabel = products.polyter.qty + ' kg'; }
+      else if(key==='solaire'){ price = products.solaire.qty * products.solaire.rate; qtyLabel = products.solaire.qty + ' unité(s)'; }
+
+      cart[key] = { name: products[key].name, qtyLabel, price };
+      btn.textContent = 'Ajouté ✓';
+      btn.classList.add('added');
+      setTimeout(()=>{ btn.textContent = 'Ajouter au devis'; btn.classList.remove('added'); }, 1400);
+      renderCart();
+    });
+  });
+
+  function renderCart(){
+    const items = Object.values(cart);
+    const count = items.length;
+    const total = items.reduce((s,i)=>s+i.price,0);
+    document.getElementById('cart-count').textContent = count;
+    document.getElementById('cart-total').textContent = count ? fmt(total) + ' FCFA' : '';
+    document.getElementById('cart-label').textContent = count
+      ? `${count} article${count>1?'s':''} au devis`
+      : 'Aucun article dans le devis';
+    document.getElementById('cart-label').classList.toggle('cart-empty-note', count===0);
+    const sendBtn = document.getElementById('send-btn');
+    sendBtn.disabled = count===0;
+  }
+
+  document.getElementById('send-btn').addEventListener('click', ()=>{
+    const items = Object.values(cart);
+    if(!items.length) return;
+    const total = items.reduce((s,i)=>s+i.price,0);
+    let msg = "Bonjour, je souhaite un devis pour :%0A";
+    items.forEach(i=>{
+      msg += `— ${i.name} (${i.qtyLabel}) : ${fmt(i.price)} FCFA%0A`;
+    });
+    msg += `%0ATotal estimé : ${fmt(total)} FCFA%0A%0AMerci de me confirmer la disponibilité.`;
+    const phone = "221770000000";
+    window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
+  });
+
+  renderCart();
+})();
+</script>
+
+</body>
+</html>
